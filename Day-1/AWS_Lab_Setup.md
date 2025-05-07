@@ -2,8 +2,8 @@
 
 ## 1. Create an AWS Account
 - Sign up at: [AWS Signup Link](https://signin.aws.amazon.com/signup?request_type=register)
-  
-- Reference PPT: [AWS Setup Guide](https://docs.google.com/document/d/1Mt8aaR8A8oNvutPVPf9ksik5V8LhHX9Q/edit#heading=h.xsn31xvaqv0q)
+
+- Reference Doc: [AWS Setup Guide](https://docs.google.com/document/d/1Mt8aaR8A8oNvutPVPf9ksik5V8LhHX9Q/edit#heading=h.xsn31xvaqv0q)
 
 ## 2. Log in to Your AWS Account
 - Use your registered credentials to access [AWS Console](https://aws.amazon.com/console/).
