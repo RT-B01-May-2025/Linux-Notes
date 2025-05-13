@@ -81,7 +81,7 @@ find . -mtime +1                     # Modified more than 1 day ago
 
 find / -mmin -5   # It will locate/display the files which modified less than 5 minutes ago.
 
-find ./ -type f -name "*.txt"        # Find all .txt files
+find / -type f -name "*.txt"        # Find all .txt files
 
 find /var/log -type f -name "*.log" -size +5M # Find files ending with .log and file size > 5M
 
