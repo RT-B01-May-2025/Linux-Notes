@@ -79,7 +79,7 @@ tac file.txt  # Show file content in reverse order
 ### **Usage:**
 ```bash
 cp devops.txt DevOps/  # Copy file to a directory
-cp -R Python DevOps/  # Copy an entire directory recursively
+cp -r Python DevOps/  # Copy an entire directory recursively
 ```
 
 **Copy all `.java` files to a directory:**
@@ -157,17 +157,17 @@ sort -u file.txt  # Remove duplicate lines
 
 ### **Usage:**
 ```bash
-grep "UNIX" abc.txt  # Case-sensitive search
-grep -i "UNIX" abc.txt  # Case-insensitive search
-grep -c "UNIX" abc.txt  # Count occurrences
-grep -l "UNIX" *  # Show files containing 'UNIX'
-grep -w "UNIX" abc.txt  # Match whole words only
+grep "DevOps" abc.txt  # Case-sensitive search
+grep -i "DEVOPS" abc.txt  # Case-insensitive search
+grep -c "DevOps" abc.txt  # Count occurrences
+grep -l "DevOps" *  # Show files containing 'UNIX'
+grep -w "Devops" abc.txt  # Match whole words only
 ```
 **Advanced Searching:**
 ```bash
-grep -o "UNIX" abc.txt  # Show only matching content
-grep -n "UNIX" abc.txt  # Show line numbers
-grep -v "UNIX" abc.txt  # Show lines that do NOT match
+grep -o "ERROR" abc.txt  # Show only matching content
+grep -n "ERROR" abc.txt  # Show line numbers
+grep -v "ERROR" abc.txt  # Show lines that do NOT match
 ```
 **Context Search:**
 ```bash
