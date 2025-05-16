@@ -87,7 +87,7 @@ find . -mtime +1                     # Modified more than 1 day ago
 
 find / -mmin -5   # It will locate/display the files which modified less than 5 minutes ago.
 
-find / -type f -name "*.txt"        # Find all .txt files
+find ./ -type f -name "*.txt"        # Find all .txt files
 
 find /var/log -type f -name "*.log" -size +5M # Find files ending with .log and file size > 5M
 
@@ -102,10 +102,10 @@ find /var/log -name "*.log" -mtime +30 -exec rm -f {} \; # Tip for DevOps Use Ca
 
 find . -name "*.sh" -exec chmod +x '{}' \; # Find all .sh files  and set executable permissions to all sh files in current directory.
 
+# The argument '{}' inserts each found file into the chmod command line. The \; argument indicates the exec command line has ended.
 
 find . -name "*.*" -ls | awk '{print $7 " " $11}' | sort -rn | head -n 10 # Find ten largest files in the current directory and recursion through all subdirectories
 
-# The argument '{}' inserts each found file into the chmod command line. The \; argument indicates the exec command line has ended.
 
 ```
 
