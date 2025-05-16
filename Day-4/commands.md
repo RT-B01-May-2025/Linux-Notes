@@ -20,6 +20,12 @@ cat demo.txt | sort | tr [a-z] [A-Z]  # Converts lowercase to uppercase
 ### `vi` Editor
 A powerful, standard editor available on all Unix/Linux systems.
 
+### Modes in VI Editor
+- **Normal Mode** (default) – Used for navigation and command execution.
+- **Insert Mode** – Used for text editing (press `i` to enter, `Esc` to exit).
+- **Command Mode** – Used for saving, quitting, and searching (press `:` in Normal mode).
+
+
 ```bash
 vi demo.txt     # Open file
 :wq             # Save and exit
@@ -163,5 +169,17 @@ w
 - Monitor logged-in users.
 - Check terminal activity.
 - System performance monitoring.
----
 
+---
+## `whereis`
+**Purpose:** Find binary, source, and manual files for a command.
+
+```bash
+whereis mkdir
+```
+**Output:**
+```
+mkdir: /usr/bin/mkdir /usr/share/man/man1/mkdir.1.gz
+```
+**Use case:** Useful when troubleshooting or understanding where commands are stored.
+---
