@@ -253,3 +253,127 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io
 ```
 ---
+
+# Service vs Systemctl in Linux
+
+## 🛠️ Overview
+
+In Linux, `service` and `systemctl` are commands used to **manage system services** (also called daemons), such as `nginx`, `mysql`, `ssh`, etc. They allow administrators to **start**, **stop**, **restart**, and **check the status** of services.
+
+---
+## 🔹 What is `daemon`?
+In Linux daemon background process that runs continuously, performs specific tasks or service.They are typically started during system boot and continue running until the system is shut down.
+
+✅ Common Daemons in Linux (with Use Cases)
+
+| Daemon           | Description                  | Use Case Example                               |
+| ---------------- | ---------------------------- | ---------------------------------------------- |
+| `sshd`           | SSH server daemon            | Enables remote login to Linux via SSH          |
+| `crond`          | Cron daemon                  | Runs scheduled tasks (cron jobs)               |
+| `systemd`        | System and service manager   | Controls startup, shutdown, services, and more |
+| `httpd`          | Apache web server daemon     | Serves websites over HTTP/HTTPS                |
+| `mysqld`         | MySQL database server daemon | Handles database queries                       |
+| `dockerd`          | Docker  daemon         | Manages docker obects(Image,Container,Network,Volume..etc)                |
+
+
+
+## 🔹 What is `service`?
+
+- `service` is a **legacy command** used to manage services using the **SysVinit** system.
+- It works with init scripts located in `/etc/init.d/`.
+
+### 📌 Common `service` Commands
+
+```bash
+service nginx start        # Start nginx service
+service apache2 stop       # Stop apache2 service
+service ssh restart        # Restart SSH service
+service mysql status       # Show status of MySQL
+```
+
+### ✅ Features of `service`
+- Simple and easy to use.
+- Works on older Linux distributions (CentOS 6, Ubuntu 14.04).
+- Does not support boot-time management (`enable`/`disable`).
+
+---
+
+## 🔹 What is `systemctl`?
+
+- `systemctl` is the **primary tool for managing systemd-based services**.
+- It controls services (called units), their states, and how they interact at boot.
+
+### 📌 Common `systemctl` Commands
+
+```bash
+systemctl start nginx        # Start nginx
+systemctl stop apache2       # Stop apache2
+systemctl restart ssh        # Restart SSH
+systemctl status mysql       # Status of MySQL
+systemctl enable docker      # Enable Docker at boot
+systemctl disable nginx      # Disable nginx at boot
+```
+
+### ✅ Features of `systemctl`
+- Works with modern Linux systems using systemd.
+- Supports enabling/disabling services at boot.
+- Provides detailed status and logs via `journalctl`.
+- Manages service dependencies and timers.
+
+---
+✅ Basic Usage Comparison
+
+| Action            | `service` Command          | `systemctl` Command                   |
+| ----------------- | -------------------------- | ------------------------------------- |
+| Start a service   | `service nginx start`      | `systemctl start nginx`               |
+| Stop a service    | `service nginx stop`       | `systemctl stop nginx`                |
+| Restart a service | `service nginx restart`    | `systemctl restart nginx`             |
+| Check status      | `service nginx status`     | `systemctl status nginx`              |
+| Enable on boot    | *(Not supported directly)* | `systemctl enable nginx`              |
+| Disable on boot   | *(Not supported directly)* | `systemctl disable nginx`             |
+| List all services | `service --status-all`     | `systemctl list-units --type=service` |
+
+## 🧠 Key Differences
+| Feature                | `service` (SysVinit)         | `systemctl` (systemd)            |
+|------------------------|------------------------------|----------------------------------|
+| Init System            | SysVinit                     | systemd                          |
+| Service Scripts Path   | `/etc/init.d/`               | `/etc/systemd/system/`           |
+| Boot-Time Management   | ❌ Not supported              | ✅ `enable`, `disable` supported  |
+| Logging Integration    | Basic (syslog)               | Advanced (`journalctl`)          |
+| Output Detail          | Basic                        | Detailed and color-coded         |
+| Dependency Handling    | Minimal                      | Full dependency support          |
+| Modern System Support  | ❌ Deprecated in new distros  | ✅ Default in modern distributions|
+
+---
+
+
+## 🔧 Real-Time Use Case
+
+**Objective**: Start and Enable Apache Web Server
+
+```bash
+# Start the service
+systemctl start apache2
+
+# Check service status
+systemctl status apache2
+
+# Enable service at system boot
+systemctl enable docker
+
+# Debugging a service
+systemctl status mysql
+journalctl -u mysql
+
+# Listing all running services
+systemctl list-units --type=service
+```
+
+---
+
+## 📝 Summary
+
+- **`service`**: Best for older systems using SysVinit. Simple but limited.
+- **`systemctl`**: Preferred tool for modern Linux systems. Powerful, flexible, and feature-rich.
+
+> 💡 Tip: Use `systemctl` for full control over services and system behavior in modern Linux environments.
