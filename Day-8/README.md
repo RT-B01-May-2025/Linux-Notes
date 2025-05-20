@@ -83,6 +83,13 @@ sudo useradd -m -s /bin/bash balaji # Command with additional options
 ```
 When a new user is created, a new group with the same name is created and the user is added to it. This group is called the primary group of the user.
 
+## 🛡️ Use Case: System/Service Users
+
+For users that should **not be able to log in**, you can use:
+```bash
+useradd -s /usr/sbin/nologin nexus
+```
+
 ---
 
 ### 🔑 Set User Password
