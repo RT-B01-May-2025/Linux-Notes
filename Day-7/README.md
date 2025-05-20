@@ -644,6 +644,8 @@ export PAGER=less
 ---
 # Soft Link and Hard Link in Linux with Examples
 
+
+
 ## 1. Hard Link
 
 ### What is a Hard Link?
@@ -672,6 +674,24 @@ ls -li original.txt hardlink.txt
 123456 -rw-r--r-- 2 user user 21 May 18 18:00 hardlink.txt
 ```
 
+🧠 Best Practice:
+Use absolute paths when you're unsure about relative positions—especially if the symlink and target are in different directories.
+
+### Example:
+```bash
+# Create a file
+echo "This is a test file" > abc.txt
+# Get pwd 
+pwd
+
+# Create a hard links with absolute paths 
+ln /home/ec2-user/abc.txt /tmp/abchard.txt
+
+# List inode numbers
+ls -li abc.txt /tmp/abchard.txt
+```
+
+
 ### Modify Using Hard Link:
 ```bash
 echo "New line added." >> hardlink.txt
@@ -693,6 +713,9 @@ A soft link is a shortcut to another file. It contains a path to the original fi
 - Breaks if the target file is deleted
 - Can link to directories
 - Can span filesystems
+
+🧠 Best Practice:
+Use absolute paths when you're unsure about relative positions—especially if the symlink and target are in different directories.
 
 ### Example:
 ```bash
@@ -765,6 +788,9 @@ Hello from directory
 | Points to              | File's data (inode)    | File path                    |
 | Can link directories?  | No                     | Yes                          |
 | File size              | Same as original       | Small (path string)          |
+
+🧠 Best Practice:
+Use absolute paths when you're unsure about relative positions—especially if the symlink and target are in different directories.
 
 ---
 
