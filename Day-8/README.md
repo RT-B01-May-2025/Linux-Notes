@@ -66,6 +66,16 @@ sudo useradd <username>
 - `-u` → Set custom UID
 - `-d` → Set custom home directory
 
+## 💡 Common Shells You Can Set with `-s`:
+
+| Shell Path            | Description                            |
+|-----------------------|----------------------------------------|
+| `/bin/bash`           | Default Bash shell                     |
+| `/bin/sh`             | Basic Bourne shell (POSIX)             |
+| `/bin/zsh`            | Z Shell (popular alternative)          |
+| `/usr/sbin/nologin`   | Prevents login (used for system users) |
+| `/bin/false`          | Another way to disable login           |
+
 **Example:**
 ```bash
 sudo useradd balaji # Basic Command
@@ -274,6 +284,7 @@ whoami
 ```bash
 groups
 ```
+
 
 ## 💡 Pro Tips
 
@@ -671,7 +682,6 @@ Example:
 which python3
 # Output: /usr/bin/python3
 ```
-
 ---
 
 ## ⚠️ Best Practices
