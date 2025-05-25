@@ -147,9 +147,35 @@ vm.swappiness=10
 ```
 /etc/init.d/apache2 start
 ```
+---
+## 👤 ~/.bash_profile And  ~/.bashrc
+
+**.bash_profile:** Loaded on login.A bash profile is a script that runs whenever you start a new shell session. To create a profile you must create a file in your home directory with nano .bash_profile. It can then be used to set environment variables, create aliases, and more, thereby customizing your terminal experience. Here’s a simple example of a bash profile:
+
+```
+# ~/.bash_profile
+vi ~/.bash_profile
+export PATH="$HOME/bin:$PATH"
+# Setting Environment Variables
+ echo "export API_KEY='your-api-key'" >> ~/.bash_profile
+ source ~/.bash_profile
+# Creating Aliases
+echo "alias ll='ls -l'" >> ~/.bash_profile
+source ~/.bash_profile
+```
+  
+**.bashrc:** Loaded on interactive shell startup.The .bashrc file is a script that Bash runs for non-login shells. Unlike .bash_profile, which only runs for login shells, .bashrc is executed every time a new bash shell is opened. This makes it ideal for configurations that need to be loaded frequently, such as setting the command prompt.
 
 ---
+## 🔁 /etc/profile
+**Description:** System-wide environment variables and login shell configuration.
 
+```
+# ~/.bash_profile
+vi /etc/profile
+export PATH="$/opt/maven/bin:$PATH"
+```
+---
 ## /etc/environment – Global Environment Variables
 **Description:** System-wide environment variables for all users.
 
