@@ -330,5 +330,112 @@ Only the **root user** (or with `sudo`) can change the ownership of files. Regul
 
 - **`chown`** = WHO owns the file  
 - **`chmod`** = WHAT they can do with the file
+---
+# SCP vs RSYNC – With Password and Key-Based Authentication
 
+This document provides examples and explanations for using `scp` and `rsync` commands with both **password-based** and **key-based** SSH authentication.
 
+---
+
+## 📦 SCP (Secure Copy)
+Used to securely copy files/folders between local and remote systems using SSH.
+
+### 🔑 1. SCP with Password-Based Authentication
+```bash
+scp file.txt user@remote_host:/remote/directory/
+```
+> Prompts for the password of `user@remote_host`.
+
+📌 **Example:**
+```bash
+scp report.txt balaji@192.168.1.100:/home/balaji/reports/
+```
+
+---
+
+### 🔐 2. SCP with Key-Based Authentication
+```bash
+scp -i /path/to/key.pemfile.txt user@remote_host:/remote/directory/
+```
+
+📌 **Example:**
+```bash
+scp -i /path/to/key.pem report.txt balaji@192.168.1.100:/home/balaji/reports/
+```
+
+💡 **Tip:** Ensure the privte key(Pem) file  on the system in which u execute scp or rsync.
+
+---
+
+## ⚙️ RSYNC (Remote Sync)
+Efficiently copies files/folders, syncing only differences using SSH by default.
+
+### 🔑 3. Rsync with Password-Based Authentication
+If SSH password is required, just use normal syntax:
+```bash
+rsync -avz file.txt user@remote_host:/remote/directory/
+```
+> Prompts for password via SSH.
+
+📌 **Example:**
+```bash
+rsync -avz /var/log/syslog balaji@192.168.1.100:/home/balaji/logs/
+```
+
+🛑 **Note:** For automated password login, consider using `sshpass` (not recommended for production):
+```bash
+sshpass -p 'password' rsync -avz file.txt user@remote_host:/remote/directory/
+```
+
+---
+
+### 🔐 4. Rsync with Key-Based Authentication
+```bash
+rsync -avz -e "ssh -i /path/to/key.pem" file.txt user@remote_host:/remote/directory/
+```
+
+📌 **Example:**
+```bash
+rsync -avz -e "ssh -i /path/to/key.pem" /var/log/syslog balaji@192.168.1.100:/home/balaji/logs/
+```
+
+---
+
+## 🧠 Comparison Table
+
+| Feature          | SCP                                   | RSYNC                                                  |
+|------------------|----------------------------------------|---------------------------------------------------------|
+| Protocol         | SSH                                    | SSH                                                     |
+| Incremental      | ❌ No                                   | ✅ Yes                                                   |
+| Directory Support| ✅ Yes (use `-r`)                      | ✅ Yes (default)                                         |
+| Compression      | ❌ No (native)                         | ✅ Yes (`-z`)                                            |
+| Resume Support   | ❌ No                                   | ✅ Yes (`--partial`)                                     |
+| Syntax Simplicity| ✅ Simple                               | ⚠️ Slightly complex for custom options                  |
+
+---
+
+## 📁 Directory Examples
+
+### SCP Recursive Directory Copy
+```bash
+scp -r myfolder/ user@host:/remote/dir/
+```
+
+### RSYNC Directory Sync with Compression and Progress
+```bash
+rsync -avz --progress myfolder/ user@host:/remote/dir/
+```
+
+## 📌 Notes
+
+- For **`.pem` file**, ensure it has the correct permission:
+  ```bash
+  chmod 400 key.pem
+  ```
+
+- If using EC2:
+  - Default user for Amazon Linux: `ec2-user`
+  - Ubuntu: `ubuntu`
+  - RedHat/CentOS: `ec2-user` or `centos`
+
+- Always **quote paths** if they contain spaces.
