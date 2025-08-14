@@ -122,7 +122,8 @@ Used for parsing and transforming text in files without opening them.
 ### Syntax & Examples
 ```bash
 sed -i 's/unix/linux/' abc.txt          # Replace first occurrence
-sed -i -z 's/unix/linux/2' abc.txt      # Replace 2nd occurrence
+sed -i -z 's/unix/linux/2' abc.txt      # Replace 2nd occurrence in same line
+sed -i '0,/unix/{s/unix/linux/2}' abc.txt  # Replace 2nd occurrence in entire file it can be any line
 sed -i 's/unix/linux/g' abc.txt         # Replace all occurrences
 
 sed  -i '3 s/unix/linux/' abc.txt        # Replace on line 3
