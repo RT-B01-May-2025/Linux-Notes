@@ -113,6 +113,70 @@ UMASK 027
 ```
 ---
 
+### 1. File Permissions
+
+File permissions (`r`, `w`, `x`) determine what actions you can perform
+**on the file itself**:
+
+-   **r (read)** → view the file's contents.\
+-   **w (write)** → modify the file's contents.\
+-   **x (execute)** → run the file as a program or script.
+
+------------------------------------------------------------------------
+
+### 2. Directory Permissions
+
+Directory permissions affect whether you can even **reach or operate on
+files inside**:
+
+-   **r (read)** → list the directory's contents (`ls`).\
+-   **x (execute)** → enter the directory and access files inside by
+    name.\
+-   **w (write)** → create, delete, or rename files inside the
+    directory.
+
+> ⚡ Without `x` on the directory, you cannot open files inside---even
+> if the file itself has read permission.
+
+------------------------------------------------------------------------
+
+### 3. Interaction Between File & Directory Permissions
+
+-   If a file is **readable** but the directory has **no execute
+    (`x`)**, you cannot open the file.\
+-   If a directory has **no read (`r`)**, you cannot list files with
+    `ls`, though you might still open files if you know their exact
+    names (provided `x` is allowed).\
+-   Directory permissions **take priority**: without proper directory
+    access, file permissions are irrelevant.
+
+------------------------------------------------------------------------
+
+## Interview Question
+### If a file has read permissions for group or others, but the parent directory does not grant the necessary permissions (such as execute or read), will group members or others still be able to access the file?
+
+### Example
+
+```bash
+# Directory with no execute permission for others drwxr-----
+mydir/ -rw-r--r-- mydir/file.txt
+```
+
+-   `file.txt` is **world-readable** (`-rw-r--r--`).\
+-   But since `mydir` has no **execute (`x`)** for "others," they
+    **cannot open** `file.txt`.
+
+------------------------------------------------------------------------
+
+### Conclusion
+
+File permissions control what you can do with the file, but **directory
+permissions control whether you can reach the file at all**.\
+If the directory doesn't grant the necessary rights (`r` and `x`),
+group/others **cannot access the file**, no matter what the file's
+permissions say.
+
+---
 ## 🛠️ `chmod` Command
 
 ### 🔹 What is `chmod`?
